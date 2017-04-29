@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	
+	default-init-method="initObject"
+	default-destroy-method="destroyObject"
+	>
+
+
+	<bean id="T1000" class="ru.javabeg.training.spring.impls.robot.ModelT1000"
+		p:hand-ref="sonyHand"
+		p:leg-ref="sonyLeg" 
+		p:head-ref="toshibaHead"		
+		>
+
+		<constructor-arg value="silver" index="0" type="String" />
+		<constructor-arg value="2006" index="1" type="int" />
+		<constructor-arg value="true" index="2" type="boolean" />
+
+		<!-- <property name="hand" ref="toshibaHand"/> -->
+		<!-- <property name="head" ref="toshibaHead"/> -->
+		<!-- <property name="leg" ref="toshibaLeg"/> -->
+
+	</bean>
+	
+	<bean id="T1000Empty" class="ru.javabeg.training.spring.impls.robot.ModelT1000">		
+
+		<constructor-arg ref="sonyHand"/>
+		<constructor-arg ref="sonyLeg"/>
+		<constructor-arg ref="toshibaHead"/>
+		
+	</bean>
+
+	<bean class="ru.javabegin.training.spring.impls.sony.SonyHand" id="sonyHand" scope="prototype"/>
+	<bean class="ru.javabegin.training.spring.impls.sony.SonyHead" id="sonyHead"/>
+	<bean class="ru.javabegin.training.spring.impls.sony.SonyLeg" id="sonyLeg"/>
+	<bean class="ru.javabegin.training.spring.impls.toshiba.ToshibaHand" id="toshibaHand"/>
+	<bean class="ru.javabegin.training.spring.impls.toshiba.ToshibaHead" id="toshibaHead"/>
+	<bean class="ru.javabegin.training.spring.impls.toshiba.ToshibaLeg"	id="toshibaLeg"/>
+	
+</beans>
