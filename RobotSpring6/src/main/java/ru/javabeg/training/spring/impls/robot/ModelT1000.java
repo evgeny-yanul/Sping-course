@@ -43,7 +43,6 @@ public class ModelT1000 implements Robot {
 		this.soundEnable = soundEnable;
 	}
 
-	@Override
 	public void action() {
 		head.calc();
 		hand.catchSomething();
@@ -53,7 +52,6 @@ public class ModelT1000 implements Robot {
 		System.out.println("can play cound: " + soundEnable);
 	}
 
-	@Override
 	public void dance() {
 		System.out.println("T1000 is dancing!");
 	}
