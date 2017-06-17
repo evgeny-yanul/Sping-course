@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+	start-state="loginForm">
+
+
+
+	<var name="user" class="ru.javabegin.training.springwebflow.objects.User" />
+
+	<view-state id="loginForm" view="login" model="user">
+		<transition on="submit" to="actionCheckLogin" />
+		<transition on="createUser" to="createUserFlow" />
+	</view-state>
+	
+	<subflow-state id="createUserFlow" subflow="create-user">
+		<transition on="userCreated" to="loginForm">
+<!-- 			<set name="flashScope.message" value="resourceBundle.user_created"/> -->
+		</transition>
+		<transition on="canceled" to="loginForm"/>
+	</subflow-state>
+
+	<action-state id="actionCheckLogin">
+		<evaluate expression="userService.userExist(user, flowRequestContext)"/>
+
+		<transition on="yes" to="mainContent" />
+		<transition on="no" to="loginForm">
+			<set name="flashScope.message" value="resourceBundle.check_user"/>
+		</transition>
+
+	</action-state>
+
+	<view-state id="mainContent" view="main" />
+
+	<global-transitions>
+		<transition on-exception="java.lang.Exception" to="loginForm" />
+	</global-transitions>
+
+</flow>
